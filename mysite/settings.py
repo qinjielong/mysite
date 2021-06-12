@@ -27,7 +27,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 ALLOWED_HOSTS="*"
-
+DEFAULT_AUTO_FIELD='django.db.models.AutoField'
 # Application definition
 
 INSTALLED_APPS = [
@@ -115,11 +115,14 @@ USE_L10N = True
 
 USE_TZ = True
 
+LOGIN_REDIRECT_URL = '/blog/'
+
+LOGIN_URL = '/account/login/'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
 STATIC_URL = '/static/'
-STATICFILES_DIR = (
+STATICFILES_DIRS = (
 	os.path.join(BASE_DIR, "static"),
 )
