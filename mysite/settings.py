@@ -38,7 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'blog',
-    'account'
+    'account',
+    'article',
 ]
 
 MIDDLEWARE = [
@@ -118,6 +119,10 @@ USE_TZ = True
 LOGIN_REDIRECT_URL = '/blog/'
 
 LOGIN_URL = '/account/login/'
+
+REDIS_HOST = 'localhost' 
+REDIS_PORT = 6379 
+REDIS_DB = 0
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
