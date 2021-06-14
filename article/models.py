@@ -30,6 +30,7 @@ class ArticlePost(models.Model):
     created = models.DateTimeField(default=timezone.now)
     updated = models.DateTimeField(auto_now=True)
     users_like = models.ManyToManyField(User, related_name="articles_like", blank=True)
+    users_unlike = models.ManyToManyField(User, related_name="articles_unlike", blank=True)
     article_tag = models.ManyToManyField(ArticleTag, related_name='article_tag', blank=True)
     class Meta:
         ordering = ("-updated",) 

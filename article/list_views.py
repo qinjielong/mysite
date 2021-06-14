@@ -26,7 +26,7 @@ def article_titles(request, username=None):
     else:
         articles_title = ArticlePost.objects.all()
     #articles_title = ArticlePost.objects.all() 
-    paginator = Paginator(articles_title, 2) 
+    paginator = Paginator(articles_title, 5) 
     page = request.GET.get('page')
     try:
         current_page = paginator.page(page)
@@ -79,7 +79,7 @@ def like_article(request):
                 article.users_like.add(request.user)
                 return HttpResponse("1") 
             else:
-                article.users_like.remove(request.user)
+                article.users_unlike.add(request.user)
                 return HttpResponse("2") 
         except:
             return HttpResponse("no")
