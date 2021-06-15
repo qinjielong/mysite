@@ -13,7 +13,9 @@
         <tr id={{ forloop.counter }}>
             <td>{{ forloop.counter }}</td> 
             <td>{{ course.title }}</td>
-            <td>{{ course.user.username }}</td> 
+            <td class="list-group-item-text"> 
+      		<a href="{% url 'course:list-lessons-by-user' course.user.username %}">{{ course.user.username }}</a>
+	    </td> 
             <td>{{ course.created }}</td>
         </tr>
         {% endfor %} 

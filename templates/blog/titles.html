@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load staticfiles %}
 {% block title %}blog titles{% endblock %}
 {% block content %}
 <div class="row text-center vertical-middle-sm">
@@ -13,9 +14,8 @@
     </ul>
     </div>
     <div class="col-xs-6 col-md-4">
-    <h2>广告</h2>
-    <p>跟老齐学:www.itdiffer.com</p>
-    <img width="200px" src=" https://raw.githubusercontent.com/qiwsir/DjangoPracticeProject/master/python-book2.png"> 
+    <p>免费使用和自由传播的类UNIX操作系统，基于POSIX的多用户、多任务、支持多线程和多CPU的操作系统</p>
+    <img src="{% static '/images/linux_blog.jpg' %}"> 
     </div>
 </div>
 {% endblock %}

@@ -1,24 +1,28 @@
 {% extends "article/base.html" %}
+{% load set_val %}
 {% block title %}List Lessons{% endblock %} 
 {% block content %}
 <div>
     <div class='text-center'> 
-        <h1>{{ course.title }}</h1>
-        <p>课程内容列表</p> 
+        <h1>课件内容列表</h1> 
     </div>
     <table class="table table-hover" style="margin-top:10px"> 
         <tr>
             <td>序号</td> 
+            <td>课程</td> 
             <td>内容标题</td> 
             <td>发布日期</td>
         </tr>
-        {% for lesson in course.lesson.all %}
-        <tr id={{ forloop.counter }}>
-            <td>{{ forloop.counter }}</td>
-            <td><a href="{% url 'course:detail_lesson' lesson.id %}">{{ lesson.title }}</a></td>
-            <td>{{ lesson.created|date:"Y-m-d" }}</td>
-        </tr>
-        {% endfor %} 
+        {% for course in courses %}
+            {% for lesson in course.lesson.all %}
+              <tr>
+	      <td>{{ forloop.counter }}</td>
+              <td>{{ course.title }}</td>
+              <td><a href="{% url 'course:detail_lesson' lesson.id %}">{{ lesson.title }}</a></td>
+              <td>{{ lesson.created|date:"Y-m-d" }}</td>
+              </tr>
+            {% endfor %} 
+        {% endfor %}
     </table>
 </div>
 {% endblock %}
