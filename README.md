@@ -9,3 +9,8 @@ develop a web server by django
 
 # Quick start
 python3 manage.py runserver 0.0.0.0:9001
+
+# visit web site
+http://0.0.0.0:9001/home
+
+
