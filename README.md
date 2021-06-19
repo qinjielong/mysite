@@ -1,4 +1,4 @@
-# mysite
+# Mysite
 develop a web server by django
 
 # Environment
@@ -10,7 +10,7 @@ develop a web server by django
 # Quick start
 python3 manage.py runserver 0.0.0.0:9001
 
-# visit web site
+# Visit your web site, to surfing
 http://0.0.0.0:9001/home
 
 
