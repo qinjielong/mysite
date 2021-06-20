@@ -8,17 +8,17 @@
         </div>
         <div>
             <ul class="nav navbar-nav" role="navigation">
-                <li><a href="{% url 'home' %}">HOME</a></li>
+                <li><a href="{% url 'home:home' %}">HOME</a></li>
                 <li><a href="{% url 'blog:blog_title' %}">BLOG</a></li>
                 <li><a href="{% url 'article:article_titles' %}">文章</a></li>
 	        <li><a href="{% url 'image:falls_images' %}">美图</a></li>
 	        <li><a href="{% url 'course:course_list' %}">课程</a></li>
-                <li><a href="{% url 'about'%}">关于本站</a></li>
+                <li><a href="{% url 'home:about'%}">关于本站</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right" style="margin-right:10px">
 		{% if user.is_authenticated %}
-		<li>
-                    <div class="dropdown" style="margin-top:8px">
+                <li>
+		    <div class="dropdown" style="margin-top:8px">
                         <button class='btn btn-default dropdown-toggle' type='button' id='dropdownMenu' data-toggle='dropdown'>{{ user.username }}
                         <span class='caret'></span> 
                         </button>
@@ -26,10 +26,13 @@
                             <li><a href="{% url 'account:password_change' %}">修改密码</a></li>
                             <li><a href="{% url 'account:my_information' %}">个人信息</a></li>
 			    <li><a href="{% url 'article:article_column' %}">后台管理</a></li>
+		            <li><a href="{% url 'account:user_logout' %}">Logout</a></li>
 			</ul> 
                     </div>
                 </li>
-		<li><a href="{% url 'account:user_logout' %}">Logout</a></li>
+		<li>
+		    <img src={{ userinfo.photo }} class="img-circle" width="50px" height="50px">
+  		</li>
 		{% else %} 
                 <li><a href="{% url 'account:user_login' %}">LOGIN</a></li> 
 		<li><a href="{% url 'account:user_register' %}">Sign up</a></li>

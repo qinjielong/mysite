@@ -66,6 +66,7 @@ def myself(request):
     userinfo = UserInfo.objects.get(user=request.user) if hasattr(request.user, 'userinfo') else UserInfo.objects.create(user=request.user)
     return render(request, "account/myself.html", {"user":request.user, "userinfo":userinfo, "userprofile":userprofile})
 
+
 @login_required(login_url='/account/login/')
 def myself_edit(request):
     userprofile = UserProfile.objects.get(user=request.user) if hasattr(request.user, 'userprofile') else UserProfile.objects.create(user=request.user)
