@@ -1,6 +1,8 @@
 # Mysite
+Mysite是一个基于django开发出来的博客网站。
 develop a web server by django
-默认使用sqlite数据库
+
+在《跟老齐学Python：Django实战》的项目上进行小修改和优化，默认使用sqlite数据库
 
 # Environment
 - CentOS 7.6
