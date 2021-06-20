@@ -14,6 +14,6 @@ develop a web server by django
 python3 manage.py runserver 0.0.0.0:9001
 
 # Visit your web site, to surfing
-http://0.0.0.0:9001/home
+http://0.0.0.0:9001/
 
 
