@@ -1,5 +1,6 @@
 # Mysite
 develop a web server by django
+默认使用sqlite数据库
 
 # Environment
 - CentOS 7.6
