@@ -18,9 +18,14 @@ from django.urls import path, include
 from django.views.generic import TemplateView
 from django.conf import settings
 from django.conf.urls.static import static
+from django.conf.urls import url
+
+admin.site.site_title = '管理后台'
+admin.site.site_header = '员工管理后台'
 
 
 urlpatterns = [
+    url(r'doc/', include('django.contrib.admindocs.urls'), name='doc'),
     path('admin/', admin.site.urls),
     #path('blog/', include('blog.urls')),
     #path('blog/', include(('blog.urls', 'blog'), namespace='blog')),

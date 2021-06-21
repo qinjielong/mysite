@@ -31,6 +31,8 @@ DEFAULT_AUTO_FIELD='django.db.models.AutoField'
 # Application definition
 
 INSTALLED_APPS = [
+    'simpleui',
+    'import_export',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -44,6 +46,9 @@ INSTALLED_APPS = [
     'image',
     'course',
     'home',
+    'django.contrib.admindocs',
+    'finance',
+    "employe",
 ]
 
 MIDDLEWARE = [
