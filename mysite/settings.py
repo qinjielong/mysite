@@ -30,6 +30,9 @@ ALLOWED_HOSTS="*"
 DEFAULT_AUTO_FIELD='django.db.models.AutoField'
 # Application definition
 
+# 指定simpleui默认的主题,指定一个文件名，相对路径就从simpleui的theme目录读取
+SIMPLEUI_DEFAULT_THEME = 'green.css'
+
 INSTALLED_APPS = [
     'simpleui',
     'import_export',
