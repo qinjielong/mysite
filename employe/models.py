@@ -1,5 +1,4 @@
 from django.db import models
-from account.models import UserProfile, UserInfo
 from django.urls import reverse
 
 
@@ -42,10 +41,8 @@ class Image(models.Model):
 
 
 class Employe(models.Model):
-    user_info = models.ForeignKey(UserInfo, on_delete=models.DO_NOTHING, blank=True, null=True)
-    user_profile = models.ForeignKey(UserProfile, on_delete=models.DO_NOTHING, blank=True, null=True)
     name = models.CharField(max_length=128, verbose_name='名称', help_text='员工的名字', null=False, blank=False, db_index=True)
-
+    status = models.CharField(max_length=32, verbose_name='状态', help_text='员工状态', null=True, blank=True, default='working')
     gender_choices = (
         (0, '未知'),
         (1, '男'),
@@ -53,7 +50,7 @@ class Employe(models.Model):
     )
 
     gender = models.IntegerField(choices=gender_choices, verbose_name='性别', default=0)
-    idCard = models.CharField(max_length=18, verbose_name='身份证号', help_text='18位的身份证号码', blank=True, null=True)
+    id_card = models.CharField(max_length=18, verbose_name='身份证号', help_text='18位的身份证号码', blank=True, null=True)
     department = models.ForeignKey(Department, on_delete=models.SET_NULL, blank=False, null=True, verbose_name='部门', db_index=True)
 
     title = models.ForeignKey(Title, on_delete=models.SET_NULL, blank=False, null=True, verbose_name='职务', db_index=True)

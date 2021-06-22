@@ -79,10 +79,10 @@ class ProxyResource(resources.ModelResource):
 @admin.register(Employe)
 class EmployeAdmin(ImportExportActionModelAdmin):
     resource_class = ProxyResource
-    list_display = ('id', 'name', 'user_info', 'user_profile', 'department', 'enable', 'create_time')
+    list_display = ('id', 'name', 'gender', 'status', 'title', 'department', 'enable', 'create_time')
     search_fields = ('name', 'department__name')
     list_per_page = 20
-    raw_id_fields = ('department', 'title')
+    #raw_id_fields = ('department', 'title')
     list_filter = ('department', 'create_time', 'enable', 'gender')
 
     list_display_links = ('id',)
@@ -91,7 +91,7 @@ class EmployeAdmin(ImportExportActionModelAdmin):
 
     date_hierarchy = 'create_time'
 
-    fieldsets = [(None, {'fields': ['name', 'user_info','user_profile','gender']}),
+    fieldsets = [(None, {'fields': ['name', 'gender', 'status', 'title']}),
                  (u'其他信息', {
                      'classes': ('123',),
                      'fields': ['department', 'enable']})]
