@@ -79,24 +79,22 @@ class ProxyResource(resources.ModelResource):
 @admin.register(Employe)
 class EmployeAdmin(ImportExportActionModelAdmin):
     resource_class = ProxyResource
-    list_display = ('id', 'name', 'gender', 'phone', 'birthday', 'department', 'enable', 'create_time')
-    # search_fields = ('name', 'enable', 'idCard', 'department')
+    list_display = ('id', 'name', 'user_info', 'user_profile', 'department', 'enable', 'create_time')
     search_fields = ('name', 'department__name')
     list_per_page = 20
     raw_id_fields = ('department', 'title')
-    #list_filter = ('department', AgeListFilter, 'create_time')
-    list_filter = ('department', 'create_time', 'birthday', 'time', 'enable', 'gender')
+    list_filter = ('department', 'create_time', 'enable', 'gender')
 
-    list_display_links = ('name',)
+    list_display_links = ('id',)
 
-    list_editable = ('department', 'phone', 'birthday', 'enable', 'gender')
+    #list_editable = ('department', 'phone', 'birthday', 'enable', 'gender')
 
     date_hierarchy = 'create_time'
 
-    fieldsets = [(None, {'fields': ['name', 'gender', 'phone']}),
+    fieldsets = [(None, {'fields': ['name', 'user_info','user_profile','gender']}),
                  (u'其他信息', {
                      'classes': ('123',),
-                     'fields': ['birthday', 'department', 'enable']})]
+                     'fields': ['department', 'enable']})]
 
     @transaction.atomic
     def test(self, request, queryset):

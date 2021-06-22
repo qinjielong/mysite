@@ -1,6 +1,5 @@
 from django.db import models
-
-# Create your models here.
+from account.models import UserProfile, UserInfo
 from django.urls import reverse
 
 
@@ -43,8 +42,9 @@ class Image(models.Model):
 
 
 class Employe(models.Model):
-    name = models.CharField(max_length=128, verbose_name='名称', help_text='员工的名字', null=False, blank=False,
-                            db_index=True)
+    user_info = models.ForeignKey(UserInfo, on_delete=models.DO_NOTHING, blank=True, null=True)
+    user_profile = models.ForeignKey(UserProfile, on_delete=models.DO_NOTHING, blank=True, null=True)
+    name = models.CharField(max_length=128, verbose_name='名称', help_text='员工的名字', null=False, blank=False, db_index=True)
 
     gender_choices = (
         (0, '未知'),
@@ -53,22 +53,13 @@ class Employe(models.Model):
     )
 
     gender = models.IntegerField(choices=gender_choices, verbose_name='性别', default=0)
-
     idCard = models.CharField(max_length=18, verbose_name='身份证号', help_text='18位的身份证号码', blank=True, null=True)
-    phone = models.CharField(max_length=11, verbose_name='手机号')
+    department = models.ForeignKey(Department, on_delete=models.SET_NULL, blank=False, null=True, verbose_name='部门', db_index=True)
 
-    birthday = models.DateField(verbose_name='生日')
-    time = models.TimeField(verbose_name='时间', auto_now=True)
-
-    department = models.ForeignKey(Department, on_delete=models.SET_NULL, blank=False, null=True, verbose_name='部门',
-                                   db_index=True)
-
-    title = models.ForeignKey(Title, on_delete=models.SET_NULL, blank=False, null=True, verbose_name='职务',
-                              db_index=True)
+    title = models.ForeignKey(Title, on_delete=models.SET_NULL, blank=False, null=True, verbose_name='职务', db_index=True)
 
     enable = models.BooleanField(verbose_name='状态', default=True)
     create_time = models.DateTimeField(verbose_name='创建时间', auto_now=True)
-
     update_time = models.DateTimeField(verbose_name='更新时间', auto_now=True)
 
     class Meta:
