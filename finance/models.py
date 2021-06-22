@@ -6,6 +6,7 @@ from django.db import models
 class Record(models.Model):
     name = models.CharField(verbose_name='收支项', max_length=128, help_text='每一笔款项描述')
     money = models.DecimalField(verbose_name='金额', decimal_places=2, max_digits=9)
+    remain = models.DecimalField(verbose_name='余额', decimal_places=2, max_digits=9)
     create_date = models.DateTimeField(verbose_name='时间', auto_now=True)
 
     type_choices = (

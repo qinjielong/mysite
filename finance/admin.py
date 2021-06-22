@@ -18,6 +18,6 @@ class RecordAdmin(ImportExportActionModelAdmin):
 
     resource_class = ProxyResource
 
-    list_display = ('id', 'name', 'type', 'money', 'create_date')
+    list_display = ('id', 'name', 'type', 'money', 'remain', 'create_date')
     list_per_page = 10
 
