@@ -7,17 +7,19 @@ from import_export.admin import ImportExportModelAdmin, ImportExportActionModelA
 
 class ProxyResource(resources.ModelResource):
     class Meta:
-        model = Record
+        model = Transaction
 
 
 # Register your models here.
-@admin.register(Record)
+@admin.register(Transaction)
 # class RecordAdmin(admin.ModelAdmin):
 # class RecordAdmin(ImportExportModelAdmin):
-class RecordAdmin(ImportExportActionModelAdmin):
-
+class TransectionAdmin(ImportExportActionModelAdmin):
     resource_class = ProxyResource
 
-    list_display = ('id', 'name', 'type', 'money', 'remain', 'create_date')
+    list_display = ('id', 'name', 'from_user', 'to_user', 'type', 'amount', 'balance', 'create_date')
+    readonly_fields = ["balance"]
     list_per_page = 10
+    def has_add_permission(self, request):
+      return False
 

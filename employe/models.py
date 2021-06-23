@@ -30,7 +30,7 @@ class Title(models.Model):
 
 class Image(models.Model):
     image = models.ImageField(verbose_name='图片')
-    title = models.ForeignKey(Title, on_delete=models.SET_NULL, blank=False, null=True, )
+    title = models.ForeignKey(Title, on_delete=models.SET_NULL, blank=False, null=True)
 
     class Meta:
         verbose_name = '图片'
