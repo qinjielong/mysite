@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+{% block extra_head %}
+<script src="/static/js/jquery-3.1.1.min.js.js" type="text/javascript"></script>
+<script src="/static/highcharts/highcharts.js"></script>
+<script src="/static/highcharts/modules/exporting.js"></script>
+<script src="/static/js/jquery.chained.min.js" type="text/javascript"></script>
+{% endblock %}
+
+{% load humanize %}
+{% block content %}
+
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.11.0/themes/smoothness/jquery-ui.css"> 
+<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+<script src="http://code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
+<script>
+$(document).ready(function() {
+    $('.datepicker').datepicker();
+});
+</script>
+
+<hr />
+<div class="nav navbar-nav navbar-right" style="margin-right:10px">
+   <a href="{% url 'finance:about_coin' %}">请阅读银币使用说明</a>
+</div>
+
+<h2> 你的帐户:{{ account.user.username }}, 余额: 
+    {% if account.balance > 0 %}
+    <span style="color:#239b56">${{ account.balance|intcomma }}</span>
+    {% else %}
+    <span style="color: #FF5733">${{ account.balance|intcomma }}</span>
+    {% endif %}
+</h2>
+
+<form action="/finance/finance-overview/" method="post" class="ink-form">
+    <input type='hidden' name='action' value='date_filter'>
+    {% csrf_token %}
+    {{ filter_form }}
+    <input type="submit" value="Filter Transactions" />
+</form>
+
+<div class="container">
+    <table class="table table-hover"> 
+        <tr>
+            <td>收支项</td>
+            <td>支出方</td>
+            <td>接收方</td>
+            <td>金额</td> 
+            <td>类型</td> 
+            <td>交易后余额</td> 
+            <td>时间</td> 
+        </tr>
+        {% for transaction in transactions %}
+        <tr>
+          <td>{{ transaction.trans_type }}</td>
+          <td>{{ transaction.from_user }}</td>
+          <td>{{ transaction.to_user }}</td>
+          <td>{{ transaction.amount|intcomma }}</td>
+          <td>{{ transaction.get_type_display }}</td>
+          <td>{{ transaction.balance|intcomma }}</td>
+          <td>{{ transaction.create_date }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+
+
+{% if error %}
+<p style="color:#FF5733">{{ error }}</p>
+{% endif %}
+
+{% endblock %}
