@@ -65,9 +65,11 @@ function publish_article(){
                 location.href = "{% url 'article:article_list' %}";
             }else if(e=="2"){ 
                 layer.msg("sorry.") ;
-            }else{ 
+            }else if(e=="3"){ 
                 layer.msg("项目名称必须写，不能空。");
-            } 
+            }else{
+                layer.msg("系统银币不足，请联系管理员处理，给你带不便，请谅解！")
+            }  
         },
     }); 
 }

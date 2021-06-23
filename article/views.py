@@ -8,6 +8,8 @@ from .forms import ArticleColumnForm, ArticlePostForm, ArticleTagForm
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 import json
 
+import finance.views as finance_view 
+
 @login_required(login_url='/account/login/') 
 @csrf_exempt
 
@@ -53,6 +55,7 @@ def del_article_column(request):
     except:
         return HttpResponse("2")
 
+
 @login_required(login_url='/account/login') 
 @csrf_exempt
 def article_post(request):
@@ -70,6 +73,14 @@ def article_post(request):
                     for atag in json.loads(tags):
                         tag = request.user.tag.get(tag=atag)
                         new_article.article_tag.add(tag)
+                
+                admin = finance_view.get_admin()
+                if admin == None:
+                  return HttpResponse("4")
+                  
+                ok = finance_view.publish_article_coin_trans(admin, request.user)
+                if not ok:
+                  return HttpResponse("5")
                 return HttpResponse("1") 
             except:
                 return HttpResponse("2") 
@@ -84,7 +95,7 @@ def article_post(request):
 @login_required(login_url='/account/login') 
 def article_list(request):
     articles_list = ArticlePost.objects.filter(author=request.user)
-    paginator = Paginator(articles_list, 2)
+    paginator = Paginator(articles_list, 10)
     page = request.GET.get('page')
     try:
         current_page = paginator.page(page)

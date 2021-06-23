@@ -6,6 +6,7 @@ from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 from .models import UserProfile, UserInfo
 
+import finance.views as finance_view 
 # Create your views here.
 
 def user_login(request):
@@ -70,12 +71,22 @@ def myself(request):
 @login_required(login_url='/account/login/')
 def myself_edit(request):
     userprofile = UserProfile.objects.get(user=request.user) if hasattr(request.user, 'userprofile') else UserProfile.objects.create(user=request.user)
+    
     userinfo = UserInfo.objects.get(user=request.user) if hasattr(request.user, 'userinfo') else UserInfo.objects.create(user=request.user)
     if request.method == "POST":
         user_form = UserForm(request.POST)
         userprofile_form = UserProfileForm(request.POST)
         userinfo_form = UserInfoForm(request.POST)
         if user_form.is_valid() * userprofile_form.is_valid() * userinfo_form.is_valid():
+            admin = finance_view.get_admin()
+            if admin == None:
+              return HttpResponse("管理员帐号异常，请联系管理员处理。")
+            
+            ok = finance_view.edit_userinfo_coin_trans(request.user, admin)
+            if not ok:
+              return HttpResponse("你的银币不足，暂时不能修改！")
+            
+          
             user_cd = user_form.cleaned_data
             userprofile_cd = userprofile_form.cleaned_data
             userinfo_cd = userinfo_form.cleaned_data

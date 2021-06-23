@@ -28,8 +28,9 @@ class TransectionAdmin(ImportExportActionModelAdmin):
     list_display = ('id', 'trans_type', 'from_user', 'to_user', 'type', 'amount', 'balance', 'create_date')
     readonly_fields = ["balance"]
     list_per_page = 10
-    #def has_add_permission(self, request):
-    #  return False
+    # 交易记录一般不在后台添加
+    def has_add_permission(self, request):
+      return False
     
     def trans_type(self,obj):
         return obj.trans_type.name

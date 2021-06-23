@@ -8,6 +8,7 @@ from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt 
 from django.views.decorators.http import require_POST
 from django.db.models import Count
+import finance.views as finance_view 
 
 import redis
 from django.conf import settings
@@ -25,8 +26,8 @@ def article_titles(request, username=None):
             userinfo = None
     else:
         articles_title = ArticlePost.objects.all()
-    #articles_title = ArticlePost.objects.all() 
-    paginator = Paginator(articles_title, 5) 
+    
+    paginator = Paginator(articles_title, 10) 
     page = request.GET.get('page')
     try:
         current_page = paginator.page(page)
@@ -53,18 +54,24 @@ def article_detail(request, id, slug):
     most_viewed.sort(key=lambda x: article_ranking_ids.index(x.id))
     
     if request.method == "POST":
+        # 发表评论
         comment_form = CommentForm(data=request.POST) 
         if comment_form.is_valid():
-            new_comment = comment_form.save(commit=False) 
-            new_comment.article = article 
-            new_comment.save()
+            ok = finance_view.comment_article_coin_trans(request.user, article.author)
+            if ok:
+              new_comment = comment_form.save(commit=False) 
+              new_comment.article = article 
+              new_comment.save()
+            else:
+              return HttpResponse('你没有银币了，不能参与评论，请尝试发表一些文章来获得！')
     else:
         comment_form = CommentForm()
+
     article_tags_ids = article.article_tag.values_list("id", flat=True)
     similar_articles = ArticlePost.objects.filter(article_tag__in=article_tags_ids).exclude(id=article.id)
     similar_articles = similar_articles.annotate(same_tags=Count("article_tag")).order_by('-same_tags', '-created')[:4]
     return render(request, "article/list/article_content.html", {"article":article, "total_views":total_views, "most_viewed": most_viewed, "comment_form":comment_form, "similar_articles":similar_articles})
-    #return render(request, "article/list/article_content.html", {"article":article})
+
 
 @csrf_exempt
 @require_POST 
