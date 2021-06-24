@@ -36,6 +36,7 @@ urlpatterns = [
     path('image/', include('image.urls', namespace='image')),
     path('course/', include('course.urls', namespace='course')),
     path('finance/', include('finance.urls', namespace='finance')),
+    path('employe/', include('employe.urls', namespace='employe')),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -8,7 +8,7 @@ class UserProfileAdmin(admin.ModelAdmin):
 admin.site.register(UserProfile, UserProfileAdmin)
 
 class UserInfoAdmin(admin.ModelAdmin):
-    list_display = ("user", 'status', 'school', 'company', 'profession', 'address', 'aboutme', 'photo')
-    list_filter = ("school", "company", "profession")
+    list_display = ("user", 'status', 'school', 'company', 'profession', 'employe_id', 'address', 'aboutme')
+    list_filter = ("user", "company", "profession")
 
 admin.site.register(UserInfo, UserInfoAdmin)
