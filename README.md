@@ -11,6 +11,10 @@ develop a web server by django, 后台管理主题使用了simpleui
 - pip3
 - simpleui
 
+# 结构
+- sqlite3+ redis 数据库
+- 现成的前端模板 + simpleui后台管理系统
+
 # Quick start
 python3 manage.py runserver 0.0.0.0:9001
 
