@@ -52,7 +52,9 @@ INSTALLED_APPS = [
     'home',
     'django.contrib.admindocs',
     'finance',
-    "employe",
+    'employe',
+    'django_plotly_dash.apps.DjangoPlotlyDashConfig',
+    'mydash',
 ]
 
 MIDDLEWARE = [

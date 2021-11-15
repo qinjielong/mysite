@@ -1,9 +1,9 @@
-python3 -m venv venv
+#python3 -m venv venv
 echo 'Create virtualenv.'
 
-source $PWD/venv/bin/activate
+#source $PWD/venv/bin/activate
 
-python3 -m pip install -r requirements.txt
+#python3 -m pip install -r requirements.txt
 
 echo 'Project initialization is complete!'
 
